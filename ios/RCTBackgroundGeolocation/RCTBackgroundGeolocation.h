@@ -6,11 +6,12 @@
 //  Copyright © 2016 mauron85. All rights reserved.
 //
 
-#if __has_include("RCTBridgeModule.h")
-#import "RCTBridgeModule.h"
+#if __has_include(<React/RCTBridgeModule.h>)
+    #import <React/RCTBridgeModule.h>
 #else
-#import <React/RCTBridgeModule.h>
+    #import "RCTBridgeModule.h"
 #endif
+
 #import "LocationManager.h"
 
 @interface RCTBackgroundGeolocation : NSObject <RCTBridgeModule, LocationManagerDelegate>
