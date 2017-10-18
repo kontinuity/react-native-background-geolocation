@@ -495,14 +495,17 @@ public class BackgroundGeolocationModule extends ReactContextBaseJavaModule impl
                     // has crashed.
                 }
 
-                // Detach our existing connection.
-                final Activity currentActivity = this.getCurrentActivity();
+                try {
 
-                if (currentActivity != null) { //workaround for issue RN #9791
-                    // not unbinding from service will cause ServiceConnectionLeaked
-                    // but there is not much we can do about it now
-                    currentActivity.unbindService(mConnection);
-                }
+                    // Detach our existing connection.
+                    final Activity currentActivity = this.getCurrentActivity();
+
+                    if (currentActivity != null) { //workaround for issue RN #9791
+                        // not unbinding from service will cause ServiceConnectionLeaked
+                        // but there is not much we can do about it now
+                        currentActivity.unbindService(mConnection);
+                    }
+                } catch(IllegalArgumentException iae) {}
 
                 mIsBound = false;
             }
