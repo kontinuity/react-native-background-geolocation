@@ -505,7 +505,7 @@ public class BackgroundGeolocationModule extends ReactContextBaseJavaModule impl
                         // but there is not much we can do about it now
                         currentActivity.unbindService(mConnection);
                     }
-                } catch(IllegalArgumentException iae) {}
+                } catch(Exception e) {}
 
                 mIsBound = false;
             }
