@@ -466,17 +466,19 @@ public class BackgroundGeolocationModule extends ReactContextBaseJavaModule impl
     }
 
     void doBindService() {
-        // Establish a connection with the service.  We use an explicit
-        // class name because there is no reason to be able to let other
-        // applications replace our component.
-        if (mIsBound) { return; }
+        try {
+            // Establish a connection with the service.  We use an explicit
+            // class name because there is no reason to be able to let other
+            // applications replace our component.
+            if (mIsBound) { return; }
 
-        mMessenger = new Messenger(new IncomingHandler());
+            mMessenger = new Messenger(new IncomingHandler());
 
-        final Activity currentActivity = this.getCurrentActivity();
-        Intent locationServiceIntent = new Intent(currentActivity, LocationService.class);
-        locationServiceIntent.putExtra("config", mConfig);
-        currentActivity.bindService(locationServiceIntent, mConnection, Context.BIND_IMPORTANT);
+            final Activity currentActivity = this.getCurrentActivity();
+            Intent locationServiceIntent = new Intent(currentActivity, LocationService.class);
+            locationServiceIntent.putExtra("config", mConfig);
+            currentActivity.bindService(locationServiceIntent, mConnection, Context.BIND_IMPORTANT);
+        } catch(Exception e) {}
     }
 
     void doUnbindService () {
