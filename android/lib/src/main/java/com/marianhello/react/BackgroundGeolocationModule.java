@@ -460,9 +460,11 @@ public class BackgroundGeolocationModule extends ReactContextBaseJavaModule impl
         if (!mIsServiceRunning) { return; }
 
         log.info("Stopping bg service");
-        final Activity currentActivity = this.getCurrentActivity();
-        currentActivity.stopService(new Intent(currentActivity, LocationService.class));
-        mIsServiceRunning = false;
+        try {
+            final Activity currentActivity = this.getCurrentActivity();
+            currentActivity.stopService(new Intent(currentActivity, LocationService.class));
+            mIsServiceRunning = false;
+        } catch(Exception e) {}
     }
 
     void doBindService() {
